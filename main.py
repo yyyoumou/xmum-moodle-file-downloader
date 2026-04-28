@@ -122,12 +122,13 @@ if __name__ == "__main__":
         course_folder_path = os.path.join(BASE_DOWNLOAD_DIR, custom_folder_name)
         os.makedirs(course_folder_path, exist_ok=True)
 
-        print(f"\n📂 正在同步: [{custom_folder_name}]")
+        print(f"\n 正在同步: [{custom_folder_name}]")
 
         sections = call_moodle_api(MY_TOKEN, "core_course_get_contents", courseid=course_id)
         if isinstance(sections, dict) and 'exception' in sections:
             continue
-
+          ##add some display windows to show more information about the new loading file
+          ## json/js
         for section in sections:
             for module in section.get('modules', []):
                 if module.get('modname') in ['resource', 'folder']:
@@ -154,4 +155,4 @@ if __name__ == "__main__":
                             except Exception as e:
                                 print(f" [失败: {e}]")
 
-    print("\n🎉 V1.2 归档完成！你的课件已全部就绪。")
+    print("\n V1.2 归档完成！你的课件已全部就绪。")
